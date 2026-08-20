@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ꜱʟʏᴅᴜꜱ — Your India Trip, Planned End to End</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A4A;
+    --ink-2:#243B63;
+    --paper:#FAF8F3;
+    --paper-2:#F1ECE0;
+    --marigold:#E8A33D;
+    --marigold-dark:#C9861F;
+    --teal:#0F5C57;
+    --maroon:#7A2E2E;
+    --charcoal:#22262B;
+    --line:#DAD2C0;
+    --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    color:var(--ink);
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--maroon);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{content:'';width:14px;height:1px;background:var(--maroon);display:inline-block;}
+  button{font-family:'Work Sans', sans-serif;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+
+  /* NAV */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,248,243,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:22px;letter-spacing:0.02em;color:var(--ink);display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--marigold);display:inline-block;}
+  nav.links{display:flex;gap:28px;font-size:14px;font-weight:500;}
+  nav.links a{color:var(--ink-2);opacity:0.85;}
+  nav.links a:hover{opacity:1;color:var(--maroon);}
+  .navcta{
+    background:var(--ink);color:var(--paper);
+    padding:10px 18px;border-radius:2px;font-size:13.5px;font-weight:600;
+    border:1px solid var(--ink);cursor:pointer;
+  }
+  .navcta:hover{background:var(--maroon);border-color:var(--maroon);}
+  @media(max-width:760px){ nav.links{display:none;} }
+
+  /* HERO */
+  .hero{padding:64px 0 40px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;} }
+  .hero h1{font-size:clamp(34px,4.6vw,54px);line-height:1.05;margin:18px 0 20px;}
+  .hero h1 em{font-style:italic;color:var(--teal);}
+  .hero p.lead{font-size:17px;max-width:46ch;color:#3B3F45;margin-bottom:28px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--maroon);color:var(--white);padding:14px 24px;font-weight:600;
+    font-size:15px;border-radius:2px;display:inline-block;border:none;cursor:pointer;
+  }
+  .btn-primary:hover{background:#5f2222;}
+  .btn-ghost{
+    padding:14px 22px;font-weight:600;font-size:15px;border:1px solid var(--ink);border-radius:2px;color:var(--ink);
+    background:none;cursor:pointer;
+  }
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);}
+
+  /* Boarding pass card */
+  .ticket{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:6px;
+    position:relative;
+    box-shadow:0 18px 40px -22px rgba(27,42,74,0.35);
+    overflow:hidden;
+  }
+  .ticket-top{padding:22px 24px 18px;border-bottom:1px dashed var(--line);position:relative;}
+  .ticket-top::before,.ticket-top::after{
+    content:'';position:absolute;bottom:-9px;width:18px;height:18px;background:var(--paper);
+    border-radius:50%;border:1px solid var(--line);
+  }
+  .ticket-top::before{left:-9px;}
+  .ticket-top::after{right:-9px;}
+  .ticket-brand{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .ticket-brand span{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.1em;color:var(--teal);text-transform:uppercase;}
+  .ticket-route{display:flex;align-items:center;gap:12px;font-family:'Fraunces';font-weight:600;font-size:22px;color:var(--ink);}
+  .ticket-route .plane{color:var(--marigold-dark);font-size:16px;}
+  .ticket-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;padding:20px 24px;}
+  .field label{display:block;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8577;margin-bottom:4px;}
+  .field .val{font-weight:600;font-size:15px;color:var(--charcoal);}
+  .ticket-bottom{
+    background:var(--ink);color:var(--paper);padding:14px 24px;
+    display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:0.06em;
+  }
+  .ticket-bottom .barcode{display:flex;gap:2px;}
+  .ticket-bottom .barcode span{width:2px;background:var(--marigold);display:inline-block;}
+
+  /* TRUST STRIP */
+  .trust{background:var(--ink);color:var(--paper);padding:30px 0;}
+  .trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
+  @media(max-width:700px){.trust .wrap{grid-template-columns:1fr 1fr;}}
+  .trust .num{font-family:'Fraunces';font-size:30px;font-weight:600;color:var(--marigold);}
+  .trust .cap{font-size:12.5px;opacity:0.8;margin-top:2px;}
+
+  /* SECTION generic */
+  section{padding:88px 0;}
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,38px);margin-top:14px;}
+  .section-head p{color:#4A4E54;margin-top:14px;font-size:16px;}
+
+  /* JOURNEY SPINE */
+  .spine{position:relative;}
+  .spine-line{
+    position:absolute;left:29px;top:10px;bottom:10px;width:2px;
+    background:repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+  }
+  @media(max-width:640px){.spine-line{left:21px;}}
+  .stage{display:grid;grid-template-columns:60px 1fr;gap:24px;position:relative;padding-bottom:44px;}
+  @media(max-width:640px){.stage{grid-template-columns:44px 1fr;gap:16px;}}
+  .stage:last-child{padding-bottom:0;}
+  .stage-marker{
+    width:60px;height:60px;border-radius:50%;background:var(--paper);
+    border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono';font-weight:600;color:var(--ink);font-size:13px;z-index:1;
+  }
+  @media(max-width:640px){.stage-marker{width:44px;height:44px;font-size:11px;}}
+  .stage.active .stage-marker{background:var(--marigold);border-color:var(--marigold-dark);color:var(--ink);}
+  .stage-body h3{font-size:20px;margin-bottom:6px;}
+  .stage-body p{color:#4A4E54;font-size:15px;max-width:56ch;}
+  .stage-tag{font-family:'IBM Plex Mono';font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;display:block;}
+
+  /* REGIONS (dark tiles) */
+  .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:900px){.dest-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.dest-grid{grid-template-columns:1fr;}}
+  .dest-card{background:var(--ink);color:var(--paper);border-radius:6px;padding:22px 20px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+  .dest-card svg{position:absolute;right:-10px;bottom:-10px;opacity:0.16;width:120px;height:120px;}
+  .dest-card h3{color:var(--paper);font-size:18px;position:relative;}
+  .dest-card p{font-size:13px;opacity:0.8;position:relative;margin-top:6px;}
+  .dest-card .tag{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--marigold);text-transform:uppercase;letter-spacing:0.08em;position:relative;}
+
+  /* PRICE / STATE CARDS */
+  .region-block{margin-bottom:44px;}
+  .region-title{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:10px;}
+  .region-title h3{font-size:18px;}
+  .region-title .count{font-family:'IBM Plex Mono';font-size:11.5px;color:#8A8577;}
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:900px){.pkg-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:640px){.pkg-grid{grid-template-columns:1fr;}}
+  .pkg-card{
+    background:var(--white);border:1px solid var(--line);border-radius:6px;padding:22px;
+    display:flex;flex-direction:column;gap:10px;cursor:pointer;position:relative;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .pkg-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px -20px rgba(27,42,74,0.4);}
+  .pkg-card.selected{border-color:var(--marigold-dark);box-shadow:0 0 0 1.5px var(--marigold-dark) inset;background:var(--paper-2);}
+  .pkg-card .check{
+    position:absolute;top:16px;right:16px;width:20px;height:20px;border-radius:50%;
+    border:1.5px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:transparent;transition:all .18s ease;
+  }
+  .pkg-card.selected .check{background:var(--marigold-dark);border-color:var(--marigold-dark);color:var(--white);}
+  .pkg-card h3{font-size:19px;padding-right:22px;}
+  .pkg-card .price{font-family:'IBM Plex Mono';color:var(--maroon);font-size:14px;font-weight:500;}
+  .pkg-card .meta{font-size:13px;color:#7A7D82;border-top:1px solid var(--line);padding-top:10px;margin-top:auto;}
+
+  /* SELECTION BAR */
+  .selection-bar{
+    position:sticky;bottom:18px;z-index:40;max-width:560px;margin:36px auto 0;
+    background:var(--ink);color:var(--paper);border-radius:4px;padding:10px 10px 10px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    box-shadow:0 18px 40px -14px rgba(13,17,31,0.5);
+  }
+  .selection-bar .count{font-family:'IBM Plex Mono';font-size:13.5px;}
+  .selection-bar .count b{color:var(--marigold);}
+  .selection-bar button{
+    background:var(--marigold);color:var(--ink);border:none;padding:12px 20px;
+    border-radius:2px;font-weight:700;font-size:13.5px;cursor:pointer;
+  }
+  .selection-bar button:hover{background:var(--white);}
+
+  /* INCLUDED */
+  .incl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+  @media(max-width:760px){.incl-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.incl-grid{grid-template-columns:1fr;}}
+  .incl-item{background:var(--white);padding:24px 20px;}
+  .incl-item .n{font-family:'IBM Plex Mono';font-size:11px;color:var(--marigold-dark);}
+  .incl-item h4{font-family:'Fraunces';font-size:16.5px;margin:8px 0 6px;color:var(--ink);}
+  .incl-item p{font-size:13.5px;color:#5A5D62;}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:900px){.testi-grid{grid-template-columns:1fr;}}
+  .testi{background:var(--paper-2);border-left:3px solid var(--marigold);padding:22px 22px;border-radius:2px;}
+  .testi p.quote{font-family:'Fraunces';font-style:italic;font-size:17px;color:var(--ink);margin-bottom:14px;}
+  .testi .who{font-family:'IBM Plex Mono';font-size:12px;color:var(--teal);}
+
+  /* CTA FOOTER BAND */
+  .cta-band{background:var(--maroon);color:var(--white);padding:70px 0;text-align:center;}
+  .cta-band h2{color:var(--white);font-size:clamp(26px,3.6vw,36px);}
+  .cta-band p{margin:14px auto 28px;max-width:52ch;opacity:0.9;}
+  .cta-band .btn-primary{background:var(--marigold);color:var(--ink);}
+  .cta-band .btn-primary:hover{background:var(--white);}
+
+  footer{background:var(--ink);color:var(--paper);padding:50px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px;}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr;}}
+  footer h5{font-family:'IBM Plex Mono';font-size:11.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--marigold);margin-bottom:14px;}
+  footer a{display:block;font-size:14px;opacity:0.82;margin-bottom:9px;}
+  footer a:hover{opacity:1;}
+  .foot-bottom{border-top:1px solid rgba(250,248,243,0.15);padding-top:20px;font-size:12.5px;opacity:0.6;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .pkg-card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="navrow wrap">
+    <div class="logo"><span class="dot"></span>ꜱʟʏᴅᴜꜱ</div>
+    <nav class="links">
+      <a href="#how">How it works</a>
+      <a href="#regions">Regions</a>
+      <a href="#states">Pricing</a>
+      <a href="#stories">Stories</a>
+    </nav>
+    <button class="navcta" id="navCta">Start my itinerary</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">One travel desk, one itinerary, one price</span>
+      <h1>Your India trip, planned like <em>a single journey</em>, not a hundred bookings.</h1>
+      <p class="lead">SLYDUS puts your flights, stays, local guides, and the states you actually want to see into one itinerary — built around your interests, not a fixed package.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" id="heroCta">Get my itinerary</button>
+        <a class="btn-ghost" href="#states">See state pricing</a>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-top">
+        <div class="ticket-brand">
+          <span>ꜱʟʏᴅᴜꜱ Journey Pass</span>
+          <span>No. WL-08213</span>
+        </div>
+        <div class="ticket-route">London <span class="plane">✈</span> Delhi</div>
+      </div>
+      <div class="ticket-fields">
+        <div class="field"><label>Traveller</label><div class="val">S. Whitfield</div></div>
+        <div class="field"><label>States selected</label><div class="val">Kerala, Goa, Rajasthan</div></div>
+        <div class="field"><label>Trip length</label><div class="val">16 days</div></div>
+        <div class="field"><label>Local guide</label><div class="val">Arjun M.</div></div>
+        <div class="field"><label>Travel desk</label><div class="val">Neha R.</div></div>
+        <div class="field"><label>Total trip cost</label><div class="val">$4,860</div></div>
+      </div>
+      <div class="ticket-bottom">
+        <span>STATUS: ITINERARY CONFIRMED</span>
+        <span class="barcode" aria-hidden="true">
+          <span style="height:16px;"></span><span style="height:22px;"></span><span style="height:14px;"></span>
+          <span style="height:20px;"></span><span style="height:16px;"></span><span style="height:24px;"></span>
+          <span style="height:12px;"></span><span style="height:18px;"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div><div class="num">28</div><div class="cap">states &amp; union territories covered end to end</div></div>
+    <div><div class="num">12k+</div><div class="cap">international travellers guided since launch</div></div>
+    <div><div class="num">100%</div><div class="cap">licensed, background-checked local guides</div></div>
+    <div><div class="num">24/7</div><div class="cap">concierge support while you travel</div></div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three stages, one person tracking all of them.</h2>
+      <p>You get a single travel consultant from your first message to your check-in call home — not a different agent for each booking.</p>
+    </div>
+
+    <div class="spine">
+      <div class="spine-line"></div>
+
+      <div class="stage active">
+        <div class="stage-marker">01</div>
+        <div class="stage-body">
+          <span class="stage-tag">Before you fly</span>
+          <h3>Pick your states &amp; get a fixed quote</h3>
+          <p>Select the states you'd like to see below. A specialist for that region replies within one business day with a day-by-day plan and firm pricing.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-marker">02</div>
+        <div class="stage-body">
+          <span class="stage-tag">On the ground</span>
+          <h3>Airport pickup &amp; a guide who stays with you</h3>
+          <p>A representative meets you at arrivals. Your local guide and driver stay with you from state to state, handling logistics so you don't have to.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-marker">03</div>
+        <div class="stage-body">
+          <span class="stage-tag">Home again</span>
+          <h3>Departure, sorted</h3>
+          <p>Transfers back to the airport are arranged around your flight, and your travel desk stays reachable until you've safely checked in for the flight home.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="regions" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Six regions, one country</span>
+      <h2>Every region has its own pace — we route you to match it.</h2>
+      <p>From Himalayan foothills to backwater houseboats, each region below is a different kind of trip. Pricing for every state sits further down the page.</p>
+    </div>
+
+    <div class="dest-grid">
+      <div class="dest-card">
+        <div>
+          <span class="tag">Punjab · Rajasthan · Himachal</span>
+          <h3>North India</h3>
+          <p>Forts, deserts and mountain passes, from Amritsar to the Himalayas.</p>
+        </div>
+        <svg viewBox="0 0 100 100"><path fill="currentColor" d="M10 75 L35 35 L50 55 L62 38 L90 75 Z"/></svg>
+      </div>
+      <div class="dest-card">
+        <div>
+          <span class="tag">Kerala · Tamil Nadu · Karnataka</span>
+          <h3>South India</h3>
+          <p>Temple towns, hill stations, and backwater houseboat stays.</p>
+        </div>
+        <svg viewBox="0 0 100 100"><path fill="currentColor" d="M20 40 h60 v10 h-8 l-4 30 h-36 l-4 -30 h-8 Z M42 20 h16 v20 h-16 Z"/></svg>
+      </div>
+      <div class="dest-card">
+        <div>
+          <span class="tag">Goa · Gujarat · Maharashtra</span>
+          <h3>West India</h3>
+          <p>Beach coastline, colonial old towns, and the Gir wilderness.</p>
+        </div>
+        <svg viewBox="0 0 100 100"><path fill="currentColor" d="M10 60 q45 25 80 0 v20 h-80 Z M50 15 v35 M40 25 h20"/></svg>
+      </div>
+      <div class="dest-card">
+        <div>
+          <span class="tag">Bihar · Odisha · West Bengal</span>
+          <h3>East India</h3>
+          <p>River cities, ancient stupas, and the Sundarbans delta.</p>
+        </div>
+        <svg viewBox="0 0 100 100"><path fill="currentColor" d="M10 70 q40 -20 80 0 l-6 8 q-34 -16 -68 0 Z M20 68 v-25 h35 v25 M55 45 l15 -15 v15 Z"/></svg>
+      </div>
+      <div class="dest-card">
+        <div>
+          <span class="tag">Madhya Pradesh · Chhattisgarh</span>
+          <h3>Central India</h3>
+          <p>Tiger reserves and carved temple towns at the country's heart.</p>
+        </div>
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="18" fill="currentColor"/><rect x="35" y="60" width="30" height="20" fill="currentColor"/></svg>
+      </div>
+      <div class="dest-card">
+        <div>
+          <span class="tag">Assam · Meghalaya · Sikkim &amp; more</span>
+          <h3>Northeast India</h3>
+          <p>Living root bridges, tea gardens, and Himalayan monasteries.</p>
+        </div>
+        <svg viewBox="0 0 100 100"><path fill="currentColor" d="M50 12 L60 32 L50 28 L40 32 Z M32 42 h36 v38 h-8 V58 a10 10 0 0 0 -20 0 V80 h-8 Z"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="states">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Step one</span>
+      <h2>Choose the states you'd like to see.</h2>
+      <p>Tap any state to add it to your enquiry. Prices are the average per-person cost for a fully guided trip, including stays, private transport, and a local guide.</p>
+    </div>
+
+    <div id="regionsList"></div>
+
+    <div class="selection-bar" id="selectionBar">
+      <span class="count" id="selectionCount">No states selected yet</span>
+      <button id="barCta">Start my itinerary</button>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What's arranged for you</span>
+      <h2>Everything outside the itinerary itself, handled.</h2>
+    </div>
+    <div class="incl-grid">
+      <div class="incl-item"><span class="n">01</span><h4>Airport pickup</h4><p>Met at arrivals, every time, regardless of flight delays.</p></div>
+      <div class="incl-item"><span class="n">02</span><h4>Local guide on call</h4><p>Present at every stop and reachable by phone 24/7.</p></div>
+      <div class="incl-item"><span class="n">03</span><h4>Local SIM &amp; transport</h4><p>Data SIM on arrival, and a driver for every transfer between stops.</p></div>
+      <div class="incl-item"><span class="n">04</span><h4>Handpicked stays</h4><p>Vetted hotels and homestays booked to your budget tier.</p></div>
+      <div class="incl-item"><span class="n">05</span><h4>Visa &amp; travel document help</h4><p>Guidance on tourist visa requirements, formatted for your embassy.</p></div>
+      <div class="incl-item"><span class="n">06</span><h4>24/7 support</h4><p>A direct line to your travel desk for the whole trip, not just office hours.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="stories">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Traveller stories</span>
+      <h2>What the itinerary actually felt like.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <p class="quote">Our guide rearranged two days around a festival we stumbled onto in Jaipur. That's not something a fixed package does.</p>
+        <div class="who">Rajasthan &amp; Delhi · travelled from Toronto</div>
+      </div>
+      <div class="testi">
+        <p class="quote">Having someone at the airport at 2am mattered more than I expected. It set the tone for the whole trip.</p>
+        <div class="who">Kerala backwaters · travelled from Nairobi</div>
+      </div>
+      <div class="testi">
+        <p class="quote">We asked to add Meghalaya two weeks before departure and the itinerary just absorbed it — no extra fuss.</p>
+        <div class="who">Assam &amp; Meghalaya · travelled from Berlin</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plan" class="cta-band">
+  <div class="wrap">
+    <h2>Tell us your dates. Get an itinerary within 48 hours.</h2>
+    <p>No obligation, no payment to get a quote — just a written day-by-day plan, a fixed price, and a travel consultant's name.</p>
+    <button class="btn-primary" id="ctaBandBtn">Start my itinerary</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color:var(--paper);margin-bottom:12px;"><span class="dot"></span>ꜱʟʏᴅᴜꜱ</div>
+        <p style="font-size:13.5px;opacity:0.75;max-width:32ch;">Travel across India, planned as one itinerary, for visitors coming from abroad.</p>
+      </div>
+      <div>
+        <h5>Regions</h5>
+        <a href="#regions">North India</a>
+        <a href="#regions">South India</a>
+        <a href="#regions">West India</a>
+        <a href="#regions">Northeast India</a>
+      </div>
+      <div>
+        <h5>Trip</h5>
+        <a href="#how">How it works</a>
+        <a href="#states">State pricing</a>
+        <a href="#stories">Traveller stories</a>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a href="mailto:samcruxe1@gmail.com">samcruxe1@gmail.com</a>
+        <a href="tel:+911140000000">+91 11 4000 0000</a>
+        <a href="#">WhatsApp travel desk</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 ꜱʟʏᴅᴜꜱ. Prices are per-person averages and vary with season and group size.</span>
+      <span>New Delhi · Jaipur · Kochi</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const stateData = [
+    { region: "North India", states: [
+      { name:"Punjab", low:1314, high:1524 },
+      { name:"Haryana", low:1210, high:1367 },
+      { name:"Himachal Pradesh", low:1367, high:1629 },
+      { name:"Uttarakhand", low:1314, high:1577 },
+      { name:"Uttar Pradesh", low:1262, high:1577 },
+      { name:"Rajasthan", low:1367, high:1629 },
+    ]},
+    { region: "South India", states: [
+      { name:"Andhra Pradesh", low:1629, high:1943 },
+      { name:"Karnataka", low:1839, high:2258 },
+      { name:"Kerala", low:2048, high:2468 },
+      { name:"Tamil Nadu", low:1943, high:2363 },
+      { name:"Telangana", low:1681, high:1996 },
+    ]},
+    { region: "West India", states: [
+      { name:"Goa", low:1734, high:2048 },
+      { name:"Gujarat", low:1524, high:1839 },
+      { name:"Maharashtra", low:1577, high:1891 },
+    ]},
+    { region: "East India", states: [
+      { name:"Bihar", low:1472, high:1734 },
+      { name:"Jharkhand", low:1577, high:1891 },
+      { name:"Odisha", low:1577, high:1891 },
+      { name:"West Bengal", low:1734, high:2048 },
+    ]},
+    { region: "Central India", states: [
+      { name:"Madhya Pradesh", low:1419, high:1734 },
+      { name:"Chhattisgarh", low:1577, high:1839 },
+    ]},
+    { region: "Northeast India", states: [
+      { name:"Arunachal Pradesh", low:2153, high:2677 },
+      { name:"Assam", low:1839, high:2258 },
+      { name:"Manipur", low:2258, high:2782 },
+      { name:"Meghalaya", low:1943, high:2363 },
+      { name:"Mizoram", low:2363, high:2887 },
+      { name:"Nagaland", low:2258, high:2782 },
+      { name:"Sikkim", low:1839, high:2258 },
+      { name:"Tripura", low:2258, high:2782 },
+    ]},
+  ];
+
+  const regionsList = document.getElementById('regionsList');
+  const selected = new Set();
+
+  function fmt(n){ return '$' + n.toLocaleString('en-US'); }
+
+  stateData.forEach(group => {
+    const block = document.createElement('div');
+    block.className = 'region-block';
+    block.innerHTML = `
+      <div class="region-title">
+        <h3>${group.region}</h3>
+        <span class="count">${group.states.length} states</span>
+      </div>
+      <div class="pkg-grid"></div>
+    `;
+    const grid = block.querySelector('.pkg-grid');
+    group.states.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'pkg-card';
+      card.innerHTML = `
+        <div class="check">✓</div>
+        <h3>${s.name}</h3>
+        <div class="price">${fmt(s.low)}–${fmt(s.high)}</div>
+        <div class="meta">Per person · full guided trip, stays &amp; transport included</div>
+      `;
+      card.addEventListener('click', () => {
+        card.classList.toggle('selected');
+        if (selected.has(s.name)) selected.delete(s.name); else selected.add(s.name);
+        updateBar();
+      });
+      grid.appendChild(card);
+    });
+    regionsList.appendChild(block);
+  });
+
+  const selectionCount = document.getElementById('selectionCount');
+  function updateBar(){
+    if (selected.size === 0){
+      selectionCount.innerHTML = 'No states selected yet';
+    } else {
+      selectionCount.innerHTML = `<b>${selected.size}</b> state${selected.size>1?'s':''} selected`;
+    }
+  }
+
+  function goToGmail(){
+    const to = 'samcruxe1@gmail.com';
+    const subject = 'My India itinerary enquiry';
+    let body;
+    if (selected.size === 0){
+      body = "Hi SLYDUS team,\n\nI'm planning a trip to India and would love your help choosing the right states. Here's a bit about what I'm after:\n\n- Travel dates:\n- Number of travellers:\n- Interests (beaches, mountains, culture, wildlife...):\n\nLooking forward to your recommendations.";
+    } else {
+      body = "Hi SLYDUS team,\n\nI'd like a custom itinerary covering:\n- " + Array.from(selected).join("\n- ") +
+        "\n\nA few details about my trip:\n- Travel dates:\n- Number of travellers:\n- Any preferences or interests:\n\nPlease send over a suggested plan and pricing.";
+    }
+    const url = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) +
+      '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.open(url, '_blank');
+  }
+
+  document.getElementById('heroCta').addEventListener('click', goToGmail);
+  document.getElementById('navCta').addEventListener('click', goToGmail);
+  document.getElementById('barCta').addEventListener('click', goToGmail);
+  document.getElementById('ctaBandBtn').addEventListener('click', goToGmail);
+</script>
+
+</body>
+</html>
